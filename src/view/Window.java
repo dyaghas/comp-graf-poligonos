@@ -19,7 +19,7 @@ public class Window extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
-		panel.setPreferredSize(new Dimension(800, 620));
+		panel.setPreferredSize(new Dimension(620, 620));
 		
 		add(panel, BorderLayout.CENTER);
 		add(buttons, BorderLayout.LINE_END);
@@ -43,8 +43,12 @@ public class Window extends JFrame {
 				buttons.getValueSliderY());
 	}
 
-	public int getValueSliderRadius() {
-		return buttons.getValueSliderRadius();
+	public int getValueSliderRadiusX() {
+		return buttons.getValueSliderRadiusX();
+	}
+
+	public int getValueSliderRadiusY() {
+		return buttons.getValueSliderRadiusY();
 	}
 	
 	public int getValueSliderQuantity() {
@@ -55,5 +59,8 @@ public class Window extends JFrame {
 		return buttons.getValueSliderRot();
 	}
 
+	public int getWindowWidth() {
+		return getWidth(); // Get the width of the JFrame (Window)
+	}
 	
 }

@@ -30,9 +30,10 @@ public class Controller {
 
 			Point2D.Double t = view.getValuePosition();
 			double a = view.getValueRotation();
-			int r = view.getValueRadius();
+			int radiusX = view.getValueRadiusX();
+			int radiusY = view.getValueRadiusY();
 			
-			Shape drawing = model.makeTransformations(t, a, r);
+			Shape drawing = model.makeTransformations(t, a, radiusX, radiusY);
 			
 			view.update(drawing);
 			

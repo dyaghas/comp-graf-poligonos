@@ -8,7 +8,7 @@ import entity.Drawing;
 
 public class Model {
 	
-	Drawing drawing = new Drawing(3, 100);
+	Drawing drawing = new Drawing(3, 10);
 	
 	public Model() {
 	}
@@ -20,22 +20,22 @@ public class Model {
 	public Shape makeTransformations(
 			Point2D.Double t,  // valor da transformação de translação
 			double angle,  // valor do angulo de rotação
-			int radius
+			int radiusX,
+			int radiusY
 			) {
 		
 		Point2D.Double centralPoint = drawing.getCentralPoint();
 		
 		AffineTransform transformation = new AffineTransform();
-		
-		// Transformação de rotação
+
 		transformation.preConcatenate(AffineTransform.getTranslateInstance(-centralPoint.x, -centralPoint.y));
+		// Transformação de rotação
 		transformation.preConcatenate(AffineTransform.getRotateInstance(angle));
-		transformation.preConcatenate(AffineTransform.getTranslateInstance(centralPoint.x, centralPoint.y));
-
-		double scaleX = 1.1;  // Suponha que originalRadius seja o raio original do desenho
-		double scaleY = 1.1;
+		// Transformação de escala
+		double scaleX = radiusX;
+		double scaleY = radiusY;
 		transformation.preConcatenate(AffineTransform.getScaleInstance(scaleX, scaleY));
-
+		transformation.preConcatenate(AffineTransform.getTranslateInstance(centralPoint.x, centralPoint.y));
 		// Transformação de Translação
 		transformation.preConcatenate(AffineTransform.getTranslateInstance(t.x, t.y));
 		
@@ -49,8 +49,5 @@ public class Model {
 	public Drawing getDrawing() {
 		return drawing;
 	}
-	
-	
-	
 
 }

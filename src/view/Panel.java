@@ -27,7 +27,7 @@ public class Panel extends JPanel {
 		
 		this.setBackground(new Color(230, 230, 230));
 		
-		g2d.setStroke(new BasicStroke(5));
+		g2d.setStroke(new BasicStroke(100));
 		
 		g2d.fill(drawing);
 		

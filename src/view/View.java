@@ -25,8 +25,12 @@ public class View {
 		return window.getValueSliderPosition();
 	}
 
-	public int getValueRadius() {
-		return window.getValueSliderRadius();
+	public int getValueRadiusX() {
+		return window.getValueSliderRadiusX();
+	}
+
+	public int getValueRadiusY() {
+		return window.getValueSliderRadiusY();
 	}
 
 	public int getValueQuantity() {
