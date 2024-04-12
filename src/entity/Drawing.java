@@ -49,7 +49,7 @@ public class Drawing extends Path2D.Double {
 		double y = center.y + radius *Math.sin(t);
 		return new Point2D.Double(x, y);
 	}
-	
+
 	public Point2D.Double getCentralPoint() {
 		Rectangle2D.Double rectangle = (Rectangle2D.Double)getBounds2D();
 

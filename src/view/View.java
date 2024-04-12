@@ -41,4 +41,8 @@ public class View {
 		return window.getValueSliderRotation();
 	}
 
+	public boolean getBoolSimetry() {
+		return window.getBoolAxisSymetry();
+	}
+
 }

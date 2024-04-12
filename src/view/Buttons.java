@@ -4,11 +4,13 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.DecimalFormat;
 
 public class Buttons extends JPanel {
 
-	//Definição dos sliders e labels de alteração do polígono
+	// Definição dos sliders e labels de alteração do polígono
 	JSlider sliderX = new JSlider(-300, 300, 0);
 	JSlider sliderY = new JSlider(-300, 300, 0);
 	JSlider sliderRadiusX = new JSlider(1, 30, 1);
@@ -22,6 +24,7 @@ public class Buttons extends JPanel {
 	JLabel labelRadiusY = new JLabel("Raio coordenada Y: 1");
 	JLabel labelPoints = new JLabel("Pontos na figura: 3");
 	JLabel labelRot = new JLabel("Rotação: 0");
+	JCheckBox symetryCheckBox = new JCheckBox("Simetria de eixo");
 	
 	public Buttons() {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -49,6 +52,9 @@ public class Buttons extends JPanel {
 
 		addLabel(labelRot);
 		addSlider(sliderRot);
+		addVerticalStrut();
+
+		addCheckBox(symetryCheckBox);
 		addVerticalStrut();
 
 		addListenerSlider(new ChangeListener() {
@@ -83,6 +89,10 @@ public class Buttons extends JPanel {
 		return (double) sliderRot.getValue()/(double) rotationFactor;
 	}
 
+	public boolean getBoolAxisSymetry() {
+		return symetryCheckBox.isSelected();
+	}
+
 	public void addListenerSlider(ChangeListener cl) {
 		sliderX.addChangeListener(cl);
 		sliderY.addChangeListener(cl);
@@ -90,9 +100,24 @@ public class Buttons extends JPanel {
 		sliderRadiusY.addChangeListener(cl);
 		sliderPoints.addChangeListener(cl);
 		sliderRot.addChangeListener(cl);
+		symetryCheckBox.addChangeListener(cl);
+
+		// Desativa ou ativa o raio do eixo Y baseado na seleção do checkbox de simetria
+		symetryCheckBox.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					labelRadiusY.setEnabled(false);
+					sliderRadiusY.setEnabled(false);
+				} else {
+					labelRadiusY.setEnabled(true);
+					sliderRadiusY.setEnabled(true);
+				}
+			}
+		});
 	}
 
-	//Atualiza os labels toda vez que uma alteração é feita no polígono
+	// Atualiza os labels toda vez que uma alteração é feita no polígono
 	private void updateLabels() {
 		labelX.setText("Posição X: " + sliderX.getValue());
 		labelY.setText("Posição Y: " + sliderY.getValue());
@@ -108,17 +133,23 @@ public class Buttons extends JPanel {
 		add(label);
 	}
 
-	//Define o layout de todos os sliders
+	// Define o layout de todos os sliders
 	private void addSlider(JSlider slider) {
 		slider.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(slider);
 	}
 
-	//Espaçamento vertical entre sliders e labels
+	private void addCheckBox(JCheckBox cb) {
+		cb.setAlignmentX(Component.LEFT_ALIGNMENT);
+		add(cb);
+	}
+
+	// Espaçamento vertical entre sliders e labels
 	private void addVerticalStrut() {
 		add(Box.createVerticalStrut(30));
 	}
 
+	// Formata strings para dois digitos decimais
 	private String twoDigitFormat(double value) {
 		DecimalFormat decimalFormat = new DecimalFormat("0.00");
 		String formattedValue = decimalFormat.format(value);

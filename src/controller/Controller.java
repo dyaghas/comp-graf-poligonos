@@ -23,7 +23,8 @@ public class Controller {
 	
 	class changeSlider implements ChangeListener{
 
-		@Override
+		@SuppressWarnings("SuspiciousNameCombination")
+        @Override
 		public void stateChanged(ChangeEvent e) {
 			int pointsQuantity = view.getValueQuantity();
 			model.updatePointsQuantity(pointsQuantity);
@@ -32,7 +33,12 @@ public class Controller {
 			double a = view.getValueRotation();
 			int radiusX = view.getValueRadiusX();
 			int radiusY = view.getValueRadiusY();
-			
+
+			// Verifica se o checkbox de simetria está selecionado
+			if(view.getBoolSimetry()) {
+                radiusY = radiusX;
+			}
+
 			Shape drawing = model.makeTransformations(t, a, radiusX, radiusY);
 			
 			view.update(drawing);

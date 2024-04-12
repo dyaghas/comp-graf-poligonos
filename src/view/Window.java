@@ -59,8 +59,8 @@ public class Window extends JFrame {
 		return buttons.getValueSliderRot();
 	}
 
-	public int getWindowWidth() {
-		return getWidth(); // Get the width of the JFrame (Window)
+	public boolean getBoolAxisSymetry() {
+		return buttons.getBoolAxisSymetry();
 	}
 	
 }
