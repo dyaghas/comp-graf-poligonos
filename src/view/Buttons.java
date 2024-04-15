@@ -24,7 +24,7 @@ public class Buttons extends JPanel {
 	JLabel labelRadiusY = new JLabel("Raio coordenada Y: 1");
 	JLabel labelPoints = new JLabel("Pontos na figura: 3");
 	JLabel labelRot = new JLabel("Rotação: 0");
-	JCheckBox symetryCheckBox = new JCheckBox("Simetria de eixo");
+	JCheckBox symmetryCheckBox = new JCheckBox("Simetria de eixo");
 	
 	public Buttons() {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -54,7 +54,7 @@ public class Buttons extends JPanel {
 		addSlider(sliderRot);
 		addVerticalStrut();
 
-		addCheckBox(symetryCheckBox);
+		addCheckBox(symmetryCheckBox);
 		addVerticalStrut();
 
 		addListenerSlider(new ChangeListener() {
@@ -90,7 +90,7 @@ public class Buttons extends JPanel {
 	}
 
 	public boolean getBoolAxisSymetry() {
-		return symetryCheckBox.isSelected();
+		return symmetryCheckBox.isSelected();
 	}
 
 	public void addListenerSlider(ChangeListener cl) {
@@ -100,10 +100,10 @@ public class Buttons extends JPanel {
 		sliderRadiusY.addChangeListener(cl);
 		sliderPoints.addChangeListener(cl);
 		sliderRot.addChangeListener(cl);
-		symetryCheckBox.addChangeListener(cl);
+		symmetryCheckBox.addChangeListener(cl);
 
 		// Desativa ou ativa o raio do eixo Y baseado na seleção do checkbox de simetria
-		symetryCheckBox.addItemListener(new ItemListener() {
+		symmetryCheckBox.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {

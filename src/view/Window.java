@@ -1,7 +1,11 @@
 package view;
+import controller.Controller;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Shape;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.geom.Point2D;
 
 import javax.swing.JFrame;
@@ -11,9 +15,11 @@ public class Window extends JFrame {
 	
 	Panel panel;
 	Buttons buttons = new Buttons();
+	Controller controller;
 	
-	public Window(Shape drawing) {
+	public Window(Shape drawing, Controller controller) {
 		super("Transformação de polígono");
+		this.controller = controller;
 		
 		panel = new Panel(drawing);
 		
@@ -22,8 +28,18 @@ public class Window extends JFrame {
 		panel.setPreferredSize(new Dimension(620, 620));
 		
 		add(panel, BorderLayout.CENTER);
-		add(buttons, BorderLayout.LINE_END);
-		
+		add(buttons, BorderLayout.LINE_START);
+
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				super.componentResized(e);
+				// Atualiza o tamanho do painel de acordo com o redimencionamento da janela
+				panel.updateWindowSize(getSize());
+					controller.updateRadius();
+			}
+		});
+
 		setVisible(true);
 		pack();
 		
@@ -61,6 +77,14 @@ public class Window extends JFrame {
 
 	public boolean getBoolAxisSymetry() {
 		return buttons.getBoolAxisSymetry();
+	}
+
+	public int getPanelHeight() {
+		return panel.getHeight();
+	}
+
+	public int getPanelWidth() {
+		return panel.getWidth();
 	}
 	
 }

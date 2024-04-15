@@ -50,7 +50,7 @@ public class Drawing extends Path2D.Double {
 		return new Point2D.Double(x, y);
 	}
 
-	public Point2D.Double getCentralPoint() {
+	public Point2D.Double getPolygonCentralPoint() {
 		Rectangle2D.Double rectangle = (Rectangle2D.Double)getBounds2D();
 
 		Point2D.Double corner = new Point2D.Double(rectangle.x, rectangle.y);
@@ -62,7 +62,4 @@ public class Drawing extends Path2D.Double {
 
 		return centralPoint;
 	}
-
-
-
 }

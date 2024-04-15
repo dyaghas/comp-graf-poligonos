@@ -1,5 +1,7 @@
 package view;
 
+import controller.Controller;
+
 import java.awt.Shape;
 import java.awt.geom.Point2D;
 
@@ -8,9 +10,12 @@ import javax.swing.event.ChangeListener;
 public class View {
 	
 	Window window;
+	Controller controller;
+
 	
-	public View(Shape drawing) {
-		window = new Window(drawing);
+	public View(Shape drawing, Controller controller) {
+		this.controller = controller;
+		window = new Window(drawing, controller);
 	}
 	
 	public void update(Shape drawing) {
@@ -43,6 +48,14 @@ public class View {
 
 	public boolean getBoolSimetry() {
 		return window.getBoolAxisSymetry();
+	}
+
+	public int getPanelHeight() {
+		return window.getPanelHeight();
+	}
+
+	public int getPanelWidth() {
+		return window.getPanelWidth();
 	}
 
 }

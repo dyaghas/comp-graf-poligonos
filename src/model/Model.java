@@ -20,11 +20,12 @@ public class Model {
 	public Shape makeTransformations(
 			Point2D.Double t,  // valor da transformação de translação
 			double angle,  // valor do angulo de rotação
-			int radiusX,
-			int radiusY
+			double radiusX,
+			double radiusY
 			) {
 		
-		Point2D.Double centralPoint = drawing.getCentralPoint();
+		Point2D.Double centralPoint = drawing.getPolygonCentralPoint();
+
 		
 		AffineTransform transformation = new AffineTransform();
 
@@ -32,16 +33,12 @@ public class Model {
 		// Transformação de rotação
 		transformation.preConcatenate(AffineTransform.getRotateInstance(angle));
 		// Transformação de escala
-		double scaleX = radiusX;
-		double scaleY = radiusY;
-		transformation.preConcatenate(AffineTransform.getScaleInstance(scaleX, scaleY));
+		transformation.preConcatenate(AffineTransform.getScaleInstance(radiusX, radiusY));
 		transformation.preConcatenate(AffineTransform.getTranslateInstance(centralPoint.x, centralPoint.y));
 		// Transformação de Translação
 		transformation.preConcatenate(AffineTransform.getTranslateInstance(t.x, t.y));
-		
-		Shape transformedShape = transformation.createTransformedShape(drawing);
 
-		return transformedShape;
+		return transformation.createTransformedShape(drawing);
 		
 		
 	}
