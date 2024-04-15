@@ -41,7 +41,7 @@ public class Controller {
 
 			// Verifica se o checkbox de simetria está selecionado
 			if(view.getBoolSimetry()) {
-                radiusY = radiusX;
+                radiusY = view.getValueRadiusX() * ((double) view.getPanelWidth()/620);
 			}
 
 			Shape drawing = model.makeTransformations(t, a, radiusX, radiusY);
@@ -56,6 +56,9 @@ public class Controller {
 		radiusX = view.getValueRadiusX() * ((double) view.getPanelHeight()/620);
 		radiusY = view.getValueRadiusY() * ((double) view.getPanelWidth()/620);
 		System.out.println(radiusX + " " + radiusY);
+		if(view.getBoolSimetry()) {
+			radiusY = view.getValueRadiusX() * ((double) view.getPanelWidth()/620);
+		}
 		Shape drawing = model.makeTransformations(t, a, radiusX, radiusY);
 		view.update(drawing);
 	}
